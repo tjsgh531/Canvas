@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>그림판</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <h1>Canvas_drawBoard</h1>
+        <canvas width="640" height="480" class="canvas">이 브라우저는 캔버스를 제공 안해주는 구데기 이네요</canvas>
+        <div class="color_btns">
+            <button class="color_btn" data-color="black"></button>
+            <button class="color_btn" data-color="red"></button>
+            <button class="color_btn" data-color="green"></button>
+            <button class="color_btn" data-color="blue"></button>
+        </div>
+        <script>
+            const selectColor = document.querySelector('.color_btns');
+            const canvas = document.querySelector('.canvas');
+            const ctx = canvas.getContext('2d');
+
+            let isdraw;
+            let color = 'black';
+
+            function onMouse(e){
+                isdraw = true;
+                
+                let startX = e.layerX;
+                let startY = e.layerY;
+
+                ctx.beginPath();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle= color;
+                ctx.moveTo(startX,startY);
+            }
+            function upMouse(){
+                isdraw = false;
+            }
+            function changeColor(e){
+                color = e.target.getAttribute('data-color');
+            }
+            function draw(e){
+                if(!isdraw){
+                   return;
+                }
+
+                let xPos = e.layerX;
+                let yPos = e.layerY;
+
+                ctx.lineTo(xPos,yPos);
+                ctx.stroke();
+            }
+            canvas.addEventListener('mousedown', onMouse);
+            canvas.addEventListener('mouseup',upMouse);
+            canvas.addEventListener('mousemove',draw);
+            selectColor.addEventListener('click',changeColor);
+        </script>
+    </body>
+</html>

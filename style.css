@@ -1,0 +1,12 @@
+.canvas{
+    background-color: #eee;
+}
+.color_btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.color_btn[data-color='black']{background-color:black;}
+.color_btn[data-color='red']{background-color:red;}
+.color_btn[data-color='green']{background-color:green;}
+.color_btn[data-color='blue']{background-color:blue;}
